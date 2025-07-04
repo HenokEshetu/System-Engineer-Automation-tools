@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: Make sure that in windows operating system, Chocolatey is installed
+
 # Must be run as root or using sudo
 if [[ $EUID -ne 0 && -z "$SUDO_USER" ]]; then
     echo "[Error] Please run this script with sudo or as root."
@@ -24,7 +26,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
     OS="windows"
 else
-    echo "[✘] Unsupported OS: $OSTYPE"
+    echo "[Error] Unsupported OS: $OSTYPE"
     exit 1
 fi
 
