@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Ensure the script is run with sudo/root
+# -------------------------------
+# Require root privileges
+# -------------------------------
 if [[ "$EUID" -ne 0 ]]; then
     echo "[Error] Please run this script as root (e.g., sudo $0)"
     exit 1
@@ -10,24 +12,16 @@ fi
 # CONFIGURATION
 # -------------------------------
 
-# Default log directories to check based on OS
 LINUX_LOG_DIRS=("/var/log")
 MAC_LOG_DIRS=("/private/var/log")
 WINDOWS_LOG_DIRS=("/c/Windows/System32/winevt/Logs")
-
-# Default log file extensions to look for
 LOG_EXTENSIONS=("log" "out")
-
-# Log rotation settings
-MAX_SIZE_MB=10       # Rotate logs over 10 MB
-MAX_BACKUPS=5        # Keep last 5 compressed archives
+MAX_SIZE_MB=10
+MAX_BACKUPS=5
 ROTATOR_LOG="/var/log/log_rotator_activity.log"
 
-# Date format for rotated logs
-TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
-
 # -------------------------------
-# Detect OS
+# Detect Operating System
 # -------------------------------
 OS=$(uname -s)
 LOG_DIRS=()
@@ -49,42 +43,54 @@ case "$OS" in
 esac
 
 # -------------------------------
-# Rotate a Single Log File
+# Log Rotation Function
 # -------------------------------
 rotate_log() {
     local logfile="$1"
-    local size_mb
-    size_mb=$(du -m "$logfile" | cut -f1)
+    local size_mb=$(du -m "$logfile" | cut -f1)
 
     if [[ "$size_mb" -ge "$MAX_SIZE_MB" ]]; then
-        local dir
+        local dir base rotated timestamp
         dir=$(dirname "$logfile")
-        local base
         base=$(basename "$logfile")
-        local rotated="$dir/${base}_${TIMESTAMP}.gz"
+        timestamp=$(date "+%Y%m%d_%H%M%S")
+        rotated="$dir/${base}_${timestamp}.gz"
 
-        echo "[ℹ] Rotating $logfile ($size_mb MB) → $rotated" | tee -a "$ROTATOR_LOG"
+        echo "[ℹ] Rotating: $logfile ($size_mb MB) → $rotated" | tee -a "$ROTATOR_LOG"
 
-        # Compress and archive
-        gzip -c "$logfile" > "$rotated" && truncate -s 0 "$logfile"
+        if gzip -c "$logfile" > "$rotated" && truncate -s 0 "$logfile"; then
+            echo "[Success] Rotated $base" | tee -a "$ROTATOR_LOG"
+        else
+            echo "[Error] Failed to rotate $logfile" | tee -a "$ROTATOR_LOG"
+            return
+        fi
 
-        # Clean up old backups
-        find "$dir" -name "${base}_*.gz" -type f -printf "%T@ %p\n" 2>/dev/null \
-            | sort -n | awk 'NR>'"$MAX_BACKUPS"'{print $2}' | xargs -r rm -f
+        # Prune old backups
+        if command -v find > /dev/null; then
+            find "$dir" -maxdepth 1 -type f -name "${base}_*.gz" \
+                -printf "%T@ %p\n" 2>/dev/null | sort -n | awk "NR>$MAX_BACKUPS {print \$2}" | xargs -r rm -f
+        else
+            # macOS fallback: use ls + awk
+            ls -t "$dir"/${base}_*.gz 2>/dev/null | awk "NR>$MAX_BACKUPS" | xargs -r rm -f
+        fi
     fi
 }
 
 # -------------------------------
-# Find and Rotate Logs
+# Main: Scan and Rotate
 # -------------------------------
-echo "Starting log rotation at $TIMESTAMP" | tee -a "$ROTATOR_LOG"
+start_time=$(date "+%Y-%m-%d %H:%M:%S")
+echo "[...] Log rotation started at $start_time" | tee -a "$ROTATOR_LOG"
 
 for log_dir in "${LOG_DIRS[@]}"; do
     if [[ -d "$log_dir" ]]; then
         while IFS= read -r -d '' logfile; do
-            rotate_log "$logfile"
-        done < <(find "$log_dir" -type f \( $(printf -- '-name "*.%s" -o ' "${LOG_EXTENSIONS[@]}" | sed 's/ -o $//') \) -print0)
+            [[ -f "$logfile" && -r "$logfile" && -w "$logfile" ]] && rotate_log "$logfile"
+        done < <(find "$log_dir" -type f \( $(printf -- '-name "*.%s" -o ' "${LOG_EXTENSIONS[@]}" | sed 's/ -o $//') \) -print0 2>/dev/null)
+    else
+        echo "[!] Log directory $log_dir not found or not accessible." | tee -a "$ROTATOR_LOG"
     fi
 done
 
-echo "[Success] Log rotation completed." | tee -a "$ROTATOR_LOG"
+end_time=$(date "+%Y-%m-%d %H:%M:%S")
+echo "[Success] Log rotation completed at $end_time" | tee -a "$ROTATOR_LOG"

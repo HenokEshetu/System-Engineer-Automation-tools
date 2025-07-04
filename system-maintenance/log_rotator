@@ -1,0 +1,84 @@
+# ================================
+# Cross-Platform Log Rotator
+# Compatible with: Windows, Linux, macOS
+# ================================
+
+# ------------------------
+# CONFIGURATION
+# ------------------------
+$MaxSizeMB = 10
+$MaxBackups = 5
+$Extensions = @("log", "out")
+$RotatorLog = if ($IsWindows) { "C:\log_rotator_activity.log" } else { "/var/log/log_rotator_activity.log" }
+$Timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+
+# ------------------------
+# DETECT OS AND LOG DIRS
+# ------------------------
+if ($IsWindows) {
+    $LogDirs = @("C:\Windows\System32\winevt\Logs")
+} elseif ($IsMacOS) {
+    $LogDirs = @("/private/var/log")
+} elseif ($IsLinux) {
+    $LogDirs = @("/var/log")
+} else {
+    Write-Host "[Error] Unsupported OS." -ForegroundColor Red
+    exit 1
+}
+
+# ------------------------
+# ROTATE A SINGLE LOG FILE
+# ------------------------
+function Rotate-Log {
+    param (
+        [string]$LogFile
+    )
+
+    try {
+        $SizeMB = [math]::Round((Get-Item $LogFile).Length / 1MB, 2)
+    } catch {
+        Write-Host "[!] Cannot read $LogFile" -ForegroundColor Yellow
+        return
+    }
+
+    if ($SizeMB -ge $MaxSizeMB) {
+        $Dir = Split-Path $LogFile
+        $Base = Split-Path $LogFile -Leaf
+        $Rotated = Join-Path $Dir "${Base}_$Timestamp.gz"
+
+        try {
+            Write-Output "[ℹ] Rotating: $LogFile ($SizeMB MB) → $Rotated" | Tee-Object -FilePath $RotatorLog -Append
+            Get-Content -Encoding Byte -ReadCount 0 -Path $LogFile | Compress-Archive -DestinationPath "$Rotated" -Update
+            Clear-Content $LogFile
+
+            # Clean up old backups
+            $OldFiles = Get-ChildItem -Path $Dir -Filter "${Base}_*.gz" | Sort-Object LastWriteTime | Select-Object -Skip $MaxBackups
+            foreach ($file in $OldFiles) {
+                Remove-Item $file.FullName -Force
+            }
+        } catch {
+            Write-Output "[Error] Failed to rotate $LogFile: $_" | Tee-Object -FilePath $RotatorLog -Append
+        }
+    }
+}
+
+# ------------------------
+# MAIN LOGIC
+# ------------------------
+Write-Output "Starting log rotation at $Timestamp" | Tee-Object -FilePath $RotatorLog -Append
+
+foreach ($Dir in $LogDirs) {
+    if (-Not (Test-Path $Dir)) {
+        Write-Output "[!] Log directory not found: $Dir" | Tee-Object -FilePath $RotatorLog -Append
+        continue
+    }
+
+    foreach ($ext in $Extensions) {
+        $LogFiles = Get-ChildItem -Path $Dir -Recurse -Include "*.$ext" -ErrorAction SilentlyContinue
+        foreach ($log in $LogFiles) {
+            Rotate-Log -LogFile $log.FullName
+        }
+    }
+}
+
+Write-Output "[Success] Log rotation completed." | Tee-Object -FilePath $RotatorLog -Append

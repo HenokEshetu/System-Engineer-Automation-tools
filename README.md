@@ -2,7 +2,7 @@
 
 This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux-based environments and cloud platforms.
 
-Each tool is built using **Python**, **Bash**, **Go**, **Rust**, depending on performance, clarity, and system access needs.
+Each tool is built using **Python**, **Bash**, **Powershell** **Go**, **Rust**, depending on performance, clarity, and system access needs.
 
 ---
 
@@ -27,6 +27,8 @@ automation-scripts/
 ├── system-maintenance/
 │ ├── update.sh
 │ ├── log_rotator.sh
+│ ├── update.ps1
+│ ├── log_rotator.ps1
 │
 ├── security-auditing/
 │ ├── find_suid.sh
@@ -75,6 +77,8 @@ automation-scripts/
 |--------|----------|-------------|
 | `update.sh` | Bash | Automates system update, upgrade, and cleanup which supports major operating systems |
 | `log_rotator.sh` | Bash | Rotates logs when size exceeds 10MB and keeps the last 5 log archives |
+| `update.ps1` | Powershell | Same as before |
+| `log_rotator.ps1` | Powershell | Same as before |
 
 ---
 
@@ -110,6 +114,7 @@ automation-scripts/
 | Go | `gopsutil` |
 | Rust | `sha2`, `chrono` (optional) |
 | Bash | POSIX-compatible shell |
+| Powershell | POSIX-compatible shell |
 
 > AWS credentials must be configured for EC2 scripts (`~/.aws/credentials`).
 
