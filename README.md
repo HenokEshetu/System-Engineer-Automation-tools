@@ -32,6 +32,7 @@ automation-scripts/
 │
 ├── security-auditing/
 │ ├── find_suid.sh
+│ ├── find_suid.ps1
 │ ├── password_strength.py
 │ ├── file_hasher.rs
 │
@@ -86,8 +87,9 @@ automation-scripts/
 | Script | Language | Description |
 |--------|----------|-------------|
 | `find_suid.sh` | Bash | Finds SUID binaries for privilege auditing |
+| `find_suid.ps1` | Powershell | Same as before |
 | `password_strength.py` | Python | Checks password complexity |
-| `file_hasher.rs` | Rust | Generates SHA256 hash of a file for integrity verification |
+| `file_hasher.rs` | Rust | A blazing-fast, cross-platform **file hashing and verification tool** written in Rust. Supports recursive directory traversal, multi-algorithm hashing, multithreading, and checksum validation. |
 
 ---
 
