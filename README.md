@@ -18,6 +18,8 @@ automation-scripts/
 │
 ├── user-management/
 │ ├── create_user.py
+| |-- delete_user.py
+| |-- list_user.py
 │
 ├── system-maintenance/
 │ ├── update.sh
@@ -56,7 +58,9 @@ automation-scripts/
 ### 👤 User Management
 | Script | Language | Description |
 |--------|----------|-------------|
-| `create_user.py` | Python | Automates Linux user creation and SSH setup |
+| `create_user.py` | Python | Automates Linux, MacOS and Windows user creation and SSH setup |
+| `delete_user.py` | Python | Automates Linux, MacOS and Windows user deletion
+| `list_user.py` | Python | Automates Linux, MacOS and Windows users list
 
 ---
 
