@@ -73,7 +73,7 @@ automation-scripts/
 ### 🧹 System Maintenance
 | Script | Language | Description |
 |--------|----------|-------------|
-| `update.sh` | Bash | Automates system update, upgrade, and cleanup |
+| `update.sh` | Bash | Automates system update, upgrade, and cleanup which supports major operating systems |
 | `log_rotator.sh` | Bash | Rotates logs when size exceeds 5MB |
 
 ---
