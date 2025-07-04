@@ -1,13 +1,14 @@
-# ⚙️ System Engineer Automation Portfolio
+# ⚙️ System Engineer Automation Scripts
 
 This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux-based environments and cloud platforms.
 
-Each tool is built using **Python**, **Bash**, **Go**, **Rust**, or **C**, depending on performance, clarity, and system access needs.
+Each tool is built using **Python**, **Bash**, **Go**, **Rust**, depending on performance, clarity, and system access needs.
 
 ---
 
 ## 📁 Project Structure by Function
 
+```
 automation-scripts/
 ├── monitoring/
 │ ├── cpu_memory_monitor.py
@@ -35,6 +36,7 @@ automation-scripts/
 │ ├── ec2_backup.py
 │
 └── README.md
+```
 
 
 ---
@@ -47,7 +49,7 @@ automation-scripts/
 | `cpu_memory_monitor.py` | Python | Logs CPU and RAM usage every 5 seconds |
 | `disk_usage.go` | Go | Reports total, used, and free disk space |
 | `log_tailer.rs` | Rust | Real-time log tailer like `tail -f` |
-| `ping_logger.c` | C | Logs ping success/failure for uptime checks |
+| `port_scanner.py` | Python | Logs ping success/failure for uptime checks |
 
 ---
 
@@ -98,7 +100,6 @@ automation-scripts/
 | Go | `gopsutil` |
 | Rust | `sha2`, `chrono` (optional) |
 | Bash | POSIX-compatible shell |
-| C | GCC or Clang |
 
 > AWS credentials must be configured for EC2 scripts (`~/.aws/credentials`).
 
@@ -124,18 +125,17 @@ rustc security-auditing/file_hasher.rs && ./file_hasher
 
 # Backup EC2 volumes tagged for backup
 python3 backup/ec2_backup.py
-
----
+```
 
 ## 📬 Contact
 
-If you're interested in collaborating or have questions about any script:
+If you are interested in collaborating or have questions about any script:
 
 **Henok Eshetu**  
-💼 Cybersecurity Professional & System Engineer  
-📧 [your-email@example.com]  
+💼 Cybersecurity Professional & System Engineering Enthusiast  
+📧 [henokeshetu2025@proton.me]  
 🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
-🐙 [GitHub](https://github.com/HenokEshetu/)
+🐙 [GitHub](https://github.com/HenokEshetu)
 
 ---
 
