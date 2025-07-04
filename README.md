@@ -63,6 +63,7 @@ automation-scripts/
 | `delete_user.py` | Python | Automates Linux, MacOS and Windows user deletion
 | `list_user.py` | Python | Automates Linux, MacOS and Windows listing users
 | `lock_user.py` | Python | Automates Linux, MacOS and Windows user suspension
+| `reset_password.py` | Python | Automates Linux, MacOS and Windows password reset
 
 ---
 
