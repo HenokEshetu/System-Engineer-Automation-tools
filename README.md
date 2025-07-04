@@ -1,6 +1,6 @@
 # ⚙️ System Engineer Automation Scripts
 
-This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux-based environments and cloud platforms.
+This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux, MacOS and Windows environments and cloud platforms.
 
 Each tool is built using **Python**, **Bash**, **Powershell** **Go**, **Rust**, depending on performance, clarity, and system access needs.
 
