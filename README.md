@@ -20,6 +20,7 @@ automation-scripts/
 │ ├── create_user.py
 | |-- delete_user.py
 | |-- list_user.py
+| |-- lock_user.py
 │
 ├── system-maintenance/
 │ ├── update.sh
@@ -60,7 +61,8 @@ automation-scripts/
 |--------|----------|-------------|
 | `create_user.py` | Python | Automates Linux, MacOS and Windows user creation and SSH setup |
 | `delete_user.py` | Python | Automates Linux, MacOS and Windows user deletion
-| `list_user.py` | Python | Automates Linux, MacOS and Windows users list
+| `list_user.py` | Python | Automates Linux, MacOS and Windows listing users
+| `lock_user.py` | Python | Automates Linux, MacOS and Windows user suspension
 
 ---
 
