@@ -1,96 +1,129 @@
-# 🔧 System Engineer Automation Scripts
+# ⚙️ System Engineer Automation Portfolio
 
-Welcome to my automation scripts — a curated collection of real-world, production-ready scripts used to streamline system engineering tasks including maintenance, user management, container deployment, and cloud backups.
+This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux-based environments and cloud platforms.
 
-These scripts are written in **Bash** and **Python**, and showcase my ability to automate infrastructure, improve security, and increase operational efficiency as a **System Engineer with cybersecurity awareness**.
+Each tool is built using **Python**, **Bash**, **Go**, **Rust**, or **C**, depending on performance, clarity, and system access needs.
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure by Function
 
 automation-scripts/
+├── monitoring/
+│ ├── cpu_memory_monitor.py
+│ ├── disk_usage.go
+│ ├── log_tailer.rs
+│ ├── port_scanner.py
 │
-├── 1-system-maintenance/
-│ ├── update.sh
-│ └── README.md
-│
-├── 2-user-management/
+├── user-management/
 │ ├── create_user.py
-│ └── README.md
 │
-├── 3-docker-deployment/
+├── system-maintenance/
+│ ├── update.sh
+│ ├── log_rotator.sh
+│
+├── security-auditing/
+│ ├── find_suid.sh
+│ ├── password_strength.py
+│ ├── file_hasher.rs
+│
+├── deployment/
 │ ├── deploy_docker.sh
-│ └── README.md
+│ ├── net_checker.go
 │
-├── 4-aws-ec2-backup/
+├── backup/
 │ ├── ec2_backup.py
-│ └── README.md
 │
 └── README.md
 
 
 ---
 
-## 🔐 Scripts Overview
+## 🔍 Categories & Tools
 
-### 1. 🧹 **System Maintenance Script** (Bash)
-Automates package updates, cleanup, and logs the results for auditing.
-- Updates packages via `apt`
-- Removes unused packages
-- Logs all output to `/var/log/sys-maintenance.log`
-
-➡️ `cd 1-system-maintenance && sudo bash update.sh`
-
----
-
-### 2. 👤 **User Creation Script with SSH Setup** (Python)
-Creates a new user account with SSH access and secure permissions.
-- Creates user with no password login
-- Copies existing `authorized_keys` file
-- Sets correct file and folder ownerships
-
-➡️ `cd 2-user-management && sudo python3 create_user.py`
+### 🖥️ Monitoring Tools
+| Script | Language | Description |
+|--------|----------|-------------|
+| `cpu_memory_monitor.py` | Python | Logs CPU and RAM usage every 5 seconds |
+| `disk_usage.go` | Go | Reports total, used, and free disk space |
+| `log_tailer.rs` | Rust | Real-time log tailer like `tail -f` |
+| `ping_logger.c` | C | Logs ping success/failure for uptime checks |
 
 ---
 
-### 3. 🐳 **Docker Auto-Deployment Script** (Bash)
-Automates Docker image update, stops the old container, and runs the latest image.
-- Pulls latest image
-- Stops and removes existing container
-- Runs new container with exposed ports
-
-➡️ `cd 3-docker-deployment && bash deploy_docker.sh`
+### 👤 User Management
+| Script | Language | Description |
+|--------|----------|-------------|
+| `create_user.py` | Python | Automates Linux user creation and SSH setup |
 
 ---
 
-### 4. ☁️ **AWS EC2 Auto Backup Script** (Python)
-Creates snapshots of EC2 volumes with `Backup=True` tag using Boto3.
-- Tag-based volume selection
-- Snapshot creation with timestamp
-- Custom tagging of snapshots for organization
-
-➡️ `cd 4-aws-ec2-backup && python3 ec2_backup.py`
+### 🧹 System Maintenance
+| Script | Language | Description |
+|--------|----------|-------------|
+| `update.sh` | Bash | Automates system update, upgrade, and cleanup |
+| `log_rotator.sh` | Bash | Rotates logs when size exceeds 5MB |
 
 ---
 
-## ✅ Requirements
-
-### System Scripts:
-- Bash 5+
-- Ubuntu/Debian-based system
-
-### Python Scripts:
-- Python 3.6+
-- Modules: `boto3`, `subprocess`
-- AWS credentials set via `~/.aws/credentials` or IAM role
+### 🔐 Security Auditing
+| Script | Language | Description |
+|--------|----------|-------------|
+| `find_suid.sh` | Bash | Finds SUID binaries for privilege auditing |
+| `password_strength.py` | Python | Checks password complexity |
+| `file_hasher.rs` | Rust | Generates SHA256 hash of a file for integrity verification |
 
 ---
 
-## 📌 Security Best Practices Used
-- Logs stored in secure locations
-- SSH and user management with permission hardening
-- Cloud backup follows tag-based policies
-- Docker deployments are isolated and clean
+### 🚀 Deployment Automation
+| Script | Language | Description |
+|--------|----------|-------------|
+| `deploy_docker.sh` | Bash | Pulls, stops, and redeploys Docker containers |
+| `net_checker.go` | Go | Checks network port availability (TCP ping) |
+
+---
+
+### ☁️ Backup & Recovery
+| Script | Language | Description |
+|--------|----------|-------------|
+| `ec2_backup.py` | Python | Creates EC2 EBS volume snapshots using tags |
+
+---
+
+## 💻 Requirements
+
+| Language | Tools/Libraries |
+|----------|-----------------|
+| Python | `psutil`, `boto3` |
+| Go | `gopsutil` |
+| Rust | `sha2`, `chrono` (optional) |
+| Bash | POSIX-compatible shell |
+| C | GCC or Clang |
+
+> AWS credentials must be configured for EC2 scripts (`~/.aws/credentials`).
+
+---
+
+## ✅ Usage Examples
+
+```bash
+# Run system update and cleanup
+bash system-maintenance/update.sh
+
+# Create user with SSH access
+sudo python3 user-management/create_user.py
+
+# Monitor system usage
+python3 monitoring/cpu_memory_monitor.py
+
+# Check and log reachable services
+go run deployment/net_checker.go
+
+# Compile and run Rust SHA256 file hasher
+rustc security-auditing/file_hasher.rs && ./file_hasher
+
+# Backup EC2 volumes tagged for backup
+python3 backup/ec2_backup.py
 
 ---
 
@@ -99,20 +132,13 @@ Creates snapshots of EC2 volumes with `Backup=True` tag using Boto3.
 If you're interested in collaborating or have questions about any script:
 
 **Henok Eshetu**  
-💼 Cybersecurity & System Engineer  
+💼 Cybersecurity Professional & System Engineer  
 📧 [your-email@example.com]  
 🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
-🐙 [GitHub](https://github.com/HenokEshetu/Portfolio)
+🐙 [GitHub](https://github.com/HenokEshetu/)
 
 ---
 
 ## ⭐ Contributions
 
 Feel free to fork this repository or suggest improvements through pull requests or issues.
-
----
-
-## 📄 License
-
-MIT License – Use freely with attribution.
-
