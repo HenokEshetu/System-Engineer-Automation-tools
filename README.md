@@ -21,6 +21,8 @@ automation-scripts/
 | |-- delete_user.py
 | |-- list_user.py
 | |-- lock_user.py
+| |-- password_reset.py
+| |-- bulk_create_users.py
 │
 ├── system-maintenance/
 │ ├── update.sh
@@ -64,6 +66,7 @@ automation-scripts/
 | `list_user.py` | Python | Automates Linux, MacOS and Windows listing users
 | `lock_user.py` | Python | Automates Linux, MacOS and Windows user suspension
 | `reset_password.py` | Python | Automates Linux, MacOS and Windows password reset
+| `bulk_create_users.py` | Python | Automates Linux, MacOS and Windows bulk users creation
 
 ---
 
