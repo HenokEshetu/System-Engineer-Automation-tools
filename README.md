@@ -18,11 +18,11 @@ automation-scripts/
 │
 ├── user-management/
 │ ├── create_user.py
-| |-- delete_user.py
-| |-- list_user.py
-| |-- lock_user.py
-| |-- password_reset.py
-| |-- bulk_create_users.py
+| ├── delete_user.py
+| ├── list_user.py
+| ├── lock_user.py
+| ├── password_reset.py
+| ├── bulk_create_users.py
 │
 ├── system-maintenance/
 │ ├── update.sh
