@@ -45,6 +45,7 @@ automation-scripts/
 │ ├── simple_backup.py
 │ ├── rsync_backup.py
 │ ├── mysql_backup.py
+│ ├── encrypted_backup.py
 │
 └── README.md
 ```
@@ -111,6 +112,7 @@ automation-scripts/
 | `simple_backup.py` | Python | Compress Home Directory (with exclusions) |
 | `rsync_backup.py` | Python | Rsync-like Backup using `filecmp` + `shutil` |
 | `mysql_backup.py` | Python | MySQL Backup with Rotation |
+| `encrypted_backup.py` | Python | Archive + Encrypt with GPG |
 
 ---
 
