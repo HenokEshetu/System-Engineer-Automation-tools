@@ -119,13 +119,14 @@ automation-scripts/
 ## 💻 Requirements
 
 | Language | Tools/Libraries |
-|----------|-----------------|
-| Python | `psutil`, `boto3` |
-| Go | `gopsutil` |
-| Rust | `sha2`, `chrono` (optional) |
-| Bash | POSIX-compatible shell |
-| Powershell | POSIX-compatible shell |
+|------------|----------------------------------------|
+| Python | `psutil`, `boto3`, `shutil`, `tarfile`, `subprocess` (standard library) |
+| Go | `gopsutil`                             |
+| Rust | `sha2`, `chrono` (optional)            |
+| Bash | POSIX-compatible shell, coreutils      |
+| Powershell | Windows PowerShell 5+ or PowerShell Core|
 
+> `gpg` is required for encrypted backups.  
 > AWS credentials must be configured for EC2 scripts (`~/.aws/credentials`).
 
 ---
@@ -158,9 +159,9 @@ If you are interested in collaborating or have questions about any script:
 
 **Henok Eshetu**  
 💼 Cybersecurity Professional & System Engineering Enthusiast  
-📧 [henokeshetu2025@proton.me]  
-🔗 [LinkedIn](https://linkedin.com/in/your-profile)  
-🐙 [GitHub](https://github.com/HenokEshetu)
+📧 henokeshetu2025@proton.me  
+🔗 [LinkedIn: henok-eshetu-284bba2b3](https://www.linkedin.com/in/henok-eshetu-284bba2b3/)  
+🐙 [Github: @HenokEshetu](https://github.com/HenokEshetu)
 
 ---
 
