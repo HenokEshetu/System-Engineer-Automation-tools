@@ -2,7 +2,7 @@
 
 This repository is a collection of automation and system tools organized by **function**, not programming language. These scripts are designed to streamline operations, enhance security, and simplify systems management for Linux, MacOS and Windows environments and cloud platforms.
 
-Each tool is built using **Python**, **Bash**, **Powershell** **Go**, **Rust**, depending on performance, clarity, and system access needs.
+Each tool is built using **Python**, **Bash**, **Powershell**, **Go**, **Rust**, depending on performance, clarity, and system access needs.
 
 ---
 
@@ -42,6 +42,7 @@ automation-scripts/
 │
 ├── backup/
 │ ├── ec2_backup.py
+│ ├── simple_backup.py
 │
 └── README.md
 ```
@@ -105,6 +106,7 @@ automation-scripts/
 | Script | Language | Description |
 |--------|----------|-------------|
 | `ec2_backup.py` | Python | Creates EC2 EBS volume snapshots using tags |
+| `simple_backup.py` | Python | Compress Home Directory (with exclusions) |
 
 ---
 
