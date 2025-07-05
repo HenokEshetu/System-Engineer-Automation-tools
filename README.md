@@ -44,6 +44,7 @@ automation-scripts/
 │ ├── ec2_backup.py
 │ ├── simple_backup.py
 │ ├── rsync_backup.py
+│ ├── mysql_backup.py
 │
 └── README.md
 ```
@@ -109,6 +110,7 @@ automation-scripts/
 | `ec2_backup.py` | Python | Creates EC2 EBS volume snapshots using tags |
 | `simple_backup.py` | Python | Compress Home Directory (with exclusions) |
 | `rsync_backup.py` | Python | Rsync-like Backup using `filecmp` + `shutil` |
+| `mysql_backup.py` | Python | MySQL Backup with Rotation |
 
 ---
 
