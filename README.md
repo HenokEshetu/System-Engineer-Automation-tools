@@ -55,7 +55,7 @@ automation-scripts/
 | Script | Language | Description |
 |--------|----------|-------------|
 | `cpu_memory_monitor.py` | Python | Logs CPU and RAM usage every 5 seconds |
-| `disk_usage.go` | Go | Reports total, used, and free disk space |
+| `disk_usage.go` | Go | Reports CPU usage (total and per-core), Memory utilization (physical RAM), Disk usage (specified partition), Disk I/O rates (read/write operations), Network traffic (bytes sent/received), and System load averagese |
 | `log_tailer.rs` | Rust | Real-time log tailer like `tail -f` |
 | `port_scanner.py` | Python | Logs ping success/failure for uptime checks |
 
