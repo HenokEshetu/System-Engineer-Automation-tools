@@ -4,6 +4,8 @@ This repository is a collection of automation and system tools organized by **fu
 
 Each tool is built using **Python**, **Bash**, **Powershell**, **Go**, **Rust**, depending on performance, clarity, and system access needs.
 
+<img src="https://github.com/HenokEshetu/System-Engineer-Automation-tools/blob/master/project-2.png?raw=true" width="100%" alt="" />
+
 ---
 
 ## 📁 Project Structure by Function
